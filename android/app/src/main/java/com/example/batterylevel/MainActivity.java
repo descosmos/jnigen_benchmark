@@ -11,6 +11,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import android.util.Log;
 import java.lang.String;
 
 public class MainActivity extends FlutterActivity {
@@ -36,6 +37,10 @@ public class MainActivity extends FlutterActivity {
                                 result.success(batteryUtils.getBatteryCharging());
                             } else if (call.method.equals("getMapTemplateData")) {
                                 result.success(batteryUtils.getMapTemplateData());
+                            } else if (call.method.equals("getInteger")) {
+                                result.success(batteryUtils.getInteger());
+                            } else if (call.method.equals("getIntegerStatic")) {
+                                result.success(BatteryUtils.getIntegerStatic());
                             } else {
                                 result.notImplemented();
                             }

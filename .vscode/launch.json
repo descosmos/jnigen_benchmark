@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "batterylevel",
+            "name": "jnigen_benchmark",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "batterylevel (profile mode)",
+            "name": "jnigen_benchmark (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "batterylevel (release mode)",
+            "name": "jnigen_benchmark (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

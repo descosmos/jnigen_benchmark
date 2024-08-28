@@ -85,6 +85,27 @@ class BatteryUtils extends jni.JObject {
     return const jni.JMapType(jni.JStringType(), jni.JStringType())
         .fromRef(_getMapTemplateData(reference).object);
   }
+
+  static final _getInteger = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__getInteger")
+      .asFunction<jni.JniResult Function(ffi.Pointer<ffi.Void>)>();
+
+  /// from: public int getInteger()
+  int getInteger() {
+    return _getInteger(reference).integer;
+  }
+
+  static final _getIntegerStatic =
+      jniLookup<ffi.NativeFunction<jni.JniResult Function()>>(
+              "BatteryUtils__getIntegerStatic")
+          .asFunction<jni.JniResult Function()>();
+
+  /// from: static public int getIntegerStatic()
+  static int getIntegerStatic() {
+    return _getIntegerStatic().integer;
+  }
 }
 
 class $BatteryUtilsType extends jni.JObjType<BatteryUtils> {

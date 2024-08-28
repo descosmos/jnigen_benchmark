@@ -71,3 +71,29 @@ JniResult BatteryUtils__getMapTemplateData(jobject self_) {
     return to_global_ref_result(_result);
 }
 
+jmethodID _m_BatteryUtils__getInteger = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__getInteger(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils,
+      &_m_BatteryUtils__getInteger, "getInteger", "()I");
+    if (_m_BatteryUtils__getInteger == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    int32_t _result = (*jniEnv)->CallIntMethod(jniEnv, self_, _m_BatteryUtils__getInteger);
+    return (JniResult){.value = {.i = _result}, .exception = check_exception()};
+}
+
+jmethodID _m_BatteryUtils__getIntegerStatic = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__getIntegerStatic() {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_static_method(_c_BatteryUtils,
+      &_m_BatteryUtils__getIntegerStatic, "getIntegerStatic", "()I");
+    if (_m_BatteryUtils__getIntegerStatic == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    int32_t _result = (*jniEnv)->CallStaticIntMethod(jniEnv, _c_BatteryUtils, _m_BatteryUtils__getIntegerStatic);
+    return (JniResult){.value = {.i = _result}, .exception = check_exception()};
+}
+

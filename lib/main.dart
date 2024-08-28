@@ -41,7 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   static const platform = MethodChannel('samples.flutter.dev/battery');
   static const int NUM = 1000;
   static const double NUM_DOUBLE = 1000.0;
-  JObject activity = JObject.fromRef(Jni.getCurrentActivity());
+  JObject? activity;
+  BatteryUtils? batteryUtils;
   // Get battery level.
   String _info = 'Unknown battery level.';
 
@@ -50,17 +51,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _measureCost() async {
     debugPrint("\n\n");
 
+    // init class
+    activity = JObject.fromRef(Jni.getCurrentActivity());
+    batteryUtils = BatteryUtils(activity!);
+
     // getBatteryLevel
     {
       // MethodChannel
       {
-        double elapsed = await _getBatteryLevel();
+        double elapsed = await timeChannelMethod("getBatteryLevel", null);
         debugPrint("getBatteryLevel MethodChannel elapsed: ${elapsed} ms");
       }
 
       // Dart_Interop
       {
-        double elapsed = await _getBatteryLevelNative();
+        double elapsed = await timeFunction((){batteryUtils?.getBatteryStatus();});
         debugPrint("getBatteryLevel Dart_Interop elapsed: ${elapsed} ms");
       }
     }
@@ -69,41 +74,72 @@ class _MyHomePageState extends State<MyHomePage> {
     {
       // MethodChannel
       {
-        double elapsed = await _getBatteryChargingStr();
+        double elapsed = await timeChannelMethod("getBatteryCharging", null);
         debugPrint("_getBatteryChargingStr MethodChannel elapsed: ${elapsed} ms");
       }
 
       // Dart_Interop
       {
-        double elapsed = await _getBatteryChargingStrNative();
-        debugPrint("_getBatteryChargingStr Dart_Interop elapsed: ${elapsed} ms");
+        double elapsed = await timeFunction((){batteryUtils?.getBatteryCharging();});
+        debugPrint(
+            "_getBatteryChargingStr Dart_Interop elapsed: ${elapsed} ms");
       }
     }
 
     // getMapTemplateData
+    // {
+    //   // MethodChannel
+    //   {
+    //     double elapsed = await _getMapTemplateData();
+    //     debugPrint("getMapTemplateData MethodChannel elapsed: ${elapsed} ms");
+    //   }
+
+    //   // Dart_Interop
+    //   {
+    //     double elapsed = await _getMapTemplateDataNative();
+    //     debugPrint("getMapTemplateData Dart_Interop elapsed: ${elapsed} ms");
+    //   }
+    // }
+
+    // getInteger
     {
       // MethodChannel
       {
-        double elapsed = await getMapTemplateData();
-        debugPrint("getMapTemplateData MethodChannel elapsed: ${elapsed} ms");
+        double elapsed = await timeChannelMethod("getInteger", null);
+        debugPrint("getInteger MethodChannel elapsed: ${elapsed} ms");
       }
 
       // Dart_Interop
       {
-        double elapsed = await _getBatteryChargingStrNative();
-        debugPrint("getMapTemplateData Dart_Interop elapsed: ${elapsed} ms");
+        double elapsed = await timeFunction((){batteryUtils?.getInteger();});
+        debugPrint("getInteger Dart_Interop elapsed: ${elapsed} ms");
+      }
+    }
+
+    // getIntegerStatic
+    {
+      // MethodChannel
+      {
+        double elapsed = await timeChannelMethod("getIntegerStatic", null);
+        debugPrint("getIntegerStatic MethodChannel elapsed: ${elapsed} ms");
+      }
+
+      // Dart_Interop
+      {
+        double elapsed = await timeFunction((){BatteryUtils.getIntegerStatic();});
+        debugPrint("getIntegerStatic Dart_Interop elapsed: ${elapsed} ms");
       }
     }
   }
 
-  Future<double> _getBatteryLevel() async {
+  Future<double> timeChannelMethod(String methodName, dynamic arguments) async {
     double averageDurationInMilliseconds = 0.0;
     int sumDurationsInMilliseconds = 0;
     for (int i = 0; i < NUM; ++i) {
       try {
         stopwatch.reset();
         stopwatch.start();
-        final result = await platform.invokeMethod<int>('getBatteryLevel');
+        final result = await platform.invokeMethod<Object>(methodName, arguments);
         stopwatch.stop();
         sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
         // debugPrint("Battery level at $result % .");
@@ -116,99 +152,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return averageDurationInMilliseconds;
   }
 
-  Future<double> _getBatteryLevelNative() async {
+  Future<double> timeFunction(Function() function) async {
     double averageDurationInMilliseconds = 0.0;
     int sumDurationsInMilliseconds = 0;
     for (int i = 0; i < NUM; ++i) {
       try {
         stopwatch.reset();
         stopwatch.start();
-        final result = BatteryUtils(activity).getBatteryStatus();
+        final result = function();
         stopwatch.stop();
         sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
         // debugPrint("Battery level at $result % .");
       } on PlatformException catch (e) {
         debugPrint("Error _getBatteryLevelNative ${e}");
-      }
-    }
-
-    averageDurationInMilliseconds = sumDurationsInMilliseconds / NUM_DOUBLE;
-    return averageDurationInMilliseconds;
-  }
-
-  Future<double> _getBatteryChargingStr() async {
-    double averageDurationInMilliseconds = 0.0;
-    int sumDurationsInMilliseconds = 0;
-    for (int i = 0; i < NUM; ++i) {
-      try {
-        stopwatch.reset();
-        stopwatch.start();
-        final result = await platform.invokeMethod<String>('getBatteryCharging');
-        stopwatch.stop();
-        sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
-        // debugPrint("Battery level at $result % .");
-      } on PlatformException catch (e) {
-        debugPrint("Error _getBatteryChargingStr ${e}");
-      }
-    }
-
-    averageDurationInMilliseconds = sumDurationsInMilliseconds / NUM_DOUBLE;
-    return averageDurationInMilliseconds;
-  }
-
-  Future<double> _getBatteryChargingStrNative() async {
-    double averageDurationInMilliseconds = 0.0;
-    int sumDurationsInMilliseconds = 0;
-    for (int i = 0; i < NUM; ++i) {
-      try {
-        stopwatch.reset();
-        stopwatch.start();
-        final result = BatteryUtils(activity).getBatteryCharging().toDartString();
-        stopwatch.stop();
-        sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
-        // debugPrint("Battery level at $result % .");
-      } on PlatformException catch (e) {
-        debugPrint("Error _getBatteryChargingStrNative ${e}");
-      }
-    }
-
-    averageDurationInMilliseconds = sumDurationsInMilliseconds / NUM_DOUBLE;
-    return averageDurationInMilliseconds;
-  }
-
-  Future<double> getMapTemplateData() async {
-    double averageDurationInMilliseconds = 0.0;
-    int sumDurationsInMilliseconds = 0;
-    for (int i = 0; i < NUM; ++i) {
-      try {
-        stopwatch.reset();
-        stopwatch.start();
-        final result = await platform.invokeMethod<Map>('getMapTemplateData');
-        stopwatch.stop();
-        sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
-        // debugPrint("getMapTemplateData level at ${result?["aion1"]} % .");
-      } on PlatformException catch (e) {
-        debugPrint("Error _getBatteryChargingStrNative ${e}");
-      }
-    }
-
-    averageDurationInMilliseconds = sumDurationsInMilliseconds / NUM_DOUBLE;
-    return averageDurationInMilliseconds;
-  }
-
-  Future<double> getMapTemplateDataNative() async {
-    double averageDurationInMilliseconds = 0.0;
-    int sumDurationsInMilliseconds = 0;
-    for (int i = 0; i < NUM; ++i) {
-      try {
-        stopwatch.reset();
-        stopwatch.start();
-        final result = BatteryUtils(activity).getMapTemplateData();
-        stopwatch.stop();
-        sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
-        // debugPrint("getMapTemplateDataNative level at ${result[JString.fromString("aion1")]?.toDartString()} % .");
-      } on PlatformException catch (e) {
-        debugPrint("Error _getBatteryChargingStrNative ${e}");
       }
     }
 

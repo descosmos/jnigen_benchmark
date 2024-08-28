@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.Keep;
 import java.util.Map;
 import java.util.HashMap;
+import android.util.Log;
+import java.lang.String;
 
 import io.flutter.embedding.android.FlutterActivity;
 
@@ -42,10 +44,16 @@ public class BatteryUtils {
     }
 
     public int getBatteryStatus() {
+        int capacity = 0;
+        // long startTime = System.currentTimeMillis();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+            capacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         }
-        return 0;
+        // long endTime = System.currentTimeMillis();
+        // long executionTime = endTime - startTime;
+        // Log.i("descosmos", "Execution time in milliseconds: " +
+        // String.valueOf(executionTime));
+        return capacity;
     }
 
     public String getBatteryCharging() {
@@ -59,4 +67,11 @@ public class BatteryUtils {
         return myMap;
     }
 
+    public int getInteger() {
+        return 72;
+    }
+
+    public static int getIntegerStatic() {
+        return 72;
+    }
 }
