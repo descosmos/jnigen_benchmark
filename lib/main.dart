@@ -60,13 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getBatteryLevel", null);
-        debugPrint("getBatteryLevel MethodChannel elapsed: ${elapsed} ms");
+        debugPrint("getBatteryLevel MethodChannel elapsed: ${elapsed} µs");
       }
 
       // Dart_Interop
       {
         double elapsed = await timeFunction((){batteryUtils?.getBatteryStatus();});
-        debugPrint("getBatteryLevel Dart_Interop elapsed: ${elapsed} ms");
+        debugPrint("getBatteryLevel Dart_Interop elapsed: ${elapsed} µs");
       }
     }
 
@@ -75,14 +75,14 @@ class _MyHomePageState extends State<MyHomePage> {
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getBatteryCharging", null);
-        debugPrint("_getBatteryChargingStr MethodChannel elapsed: ${elapsed} ms");
+        debugPrint("getBatteryCharging MethodChannel elapsed: ${elapsed} µs");
       }
 
       // Dart_Interop
       {
         double elapsed = await timeFunction((){batteryUtils?.getBatteryCharging();});
         debugPrint(
-            "_getBatteryChargingStr Dart_Interop elapsed: ${elapsed} ms");
+            "getBatteryCharging Dart_Interop elapsed: ${elapsed} µs");
       }
     }
 
@@ -91,13 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
     //   // MethodChannel
     //   {
     //     double elapsed = await _getMapTemplateData();
-    //     debugPrint("getMapTemplateData MethodChannel elapsed: ${elapsed} ms");
+    //     debugPrint("getMapTemplateData MethodChannel elapsed: ${elapsed} µs");
     //   }
 
     //   // Dart_Interop
     //   {
     //     double elapsed = await _getMapTemplateDataNative();
-    //     debugPrint("getMapTemplateData Dart_Interop elapsed: ${elapsed} ms");
+    //     debugPrint("getMapTemplateData Dart_Interop elapsed: ${elapsed} µs");
     //   }
     // }
 
@@ -106,13 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getInteger", null);
-        debugPrint("getInteger MethodChannel elapsed: ${elapsed} ms");
+        debugPrint("getInteger MethodChannel elapsed: ${elapsed} µs");
       }
 
       // Dart_Interop
       {
         double elapsed = await timeFunction((){batteryUtils?.getInteger();});
-        debugPrint("getInteger Dart_Interop elapsed: ${elapsed} ms");
+        debugPrint("getInteger Dart_Interop elapsed: ${elapsed} µs");
       }
     }
 
@@ -121,13 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getIntegerStatic", null);
-        debugPrint("getIntegerStatic MethodChannel elapsed: ${elapsed} ms");
+        debugPrint("getIntegerStatic MethodChannel elapsed: ${elapsed} µs");
       }
 
       // Dart_Interop
       {
         double elapsed = await timeFunction((){BatteryUtils.getIntegerStatic();});
-        debugPrint("getIntegerStatic Dart_Interop elapsed: ${elapsed} ms");
+        debugPrint("getIntegerStatic Dart_Interop elapsed: ${elapsed} µs");
       }
     }
   }
@@ -141,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
         stopwatch.start();
         final result = await platform.invokeMethod<Object>(methodName, arguments);
         stopwatch.stop();
-        sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
+        sumDurationsInMilliseconds += stopwatch.elapsedMicroseconds;
         // debugPrint("Battery level at $result % .");
       } on PlatformException catch (e) {
         debugPrint("Error _getBatteryLevel ${e}");
@@ -161,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
         stopwatch.start();
         final result = function();
         stopwatch.stop();
-        sumDurationsInMilliseconds += stopwatch.elapsedMilliseconds;
+        sumDurationsInMilliseconds += stopwatch.elapsedMicroseconds;
         // debugPrint("Battery level at $result % .");
       } on PlatformException catch (e) {
         debugPrint("Error _getBatteryLevelNative ${e}");
