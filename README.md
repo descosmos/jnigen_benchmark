@@ -1,16 +1,27 @@
-# batterylevel
+# jnigen benchmark
+Benchmark of jnigen.
 
-A new Flutter project.
 
-## Getting Started
+# result
+```sh
 
-This project is a starting point for a Flutter application.
+I/flutter (18735): 
+I/flutter (18735): getBatteryLevel MethodChannel elapsed: 6.548 ms
+I/flutter (18735): getBatteryLevel Dart_Interop elapsed: 6.517 ms
+I/flutter (18735): _getBatteryChargingStr MethodChannel elapsed: 0.001 ms
+I/flutter (18735): _getBatteryChargingStr Dart_Interop elapsed: 0.0 ms
+I/flutter (18735): getMapTemplateData MethodChannel elapsed: 0.001 ms
+I/flutter (18735): getMapTemplateData Dart_Interop elapsed: 0.0 ms
 
-A few resources to get you started if this is your first Flutter project:
+I/flutter (18735): 
+I/flutter (18735): getBatteryLevel MethodChannel elapsed: 6.53 ms
+I/flutter (18735): getBatteryLevel Dart_Interop elapsed: 6.469 ms
+I/flutter (18735): _getBatteryChargingStr MethodChannel elapsed: 0.002 ms
+I/flutter (18735): _getBatteryChargingStr Dart_Interop elapsed: 0.001 ms
+I/flutter (18735): getMapTemplateData MethodChannel elapsed: 0.002 ms
+I/flutter (18735): getMapTemplateData Dart_Interop elapsed: 0.0 ms
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Question:
+Sometimes, the performance of jnigen even worse than method channel.
