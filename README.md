@@ -1,8 +1,14 @@
 # jnigen benchmark
 Benchmark of jnigen.
 
+# Enviroment
+
+- phone: Readmi Note 12 Turbo
+- os: Android 13
 
 # result
+
+Result of execute every funtion 1000 times.
 ```sh
 I/flutter (22032): 
 I/flutter (22032): getBatteryLevel MethodChannel elapsed: 8253.175 µs
