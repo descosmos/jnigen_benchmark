@@ -71,6 +71,45 @@ JniResult BatteryUtils__getMapTemplateData(jobject self_) {
     return to_global_ref_result(_result);
 }
 
+jmethodID _m_BatteryUtils__geString50 = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__geString50(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils,
+      &_m_BatteryUtils__geString50, "geString50", "()Ljava/lang/String;");
+    if (_m_BatteryUtils__geString50 == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    jobject _result = (*jniEnv)->CallObjectMethod(jniEnv, self_, _m_BatteryUtils__geString50);
+    return to_global_ref_result(_result);
+}
+
+jmethodID _m_BatteryUtils__getString100 = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__getString100(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils,
+      &_m_BatteryUtils__getString100, "getString100", "()Ljava/lang/String;");
+    if (_m_BatteryUtils__getString100 == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    jobject _result = (*jniEnv)->CallObjectMethod(jniEnv, self_, _m_BatteryUtils__getString100);
+    return to_global_ref_result(_result);
+}
+
+jmethodID _m_BatteryUtils__getStructCoordinate = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__getStructCoordinate(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils,
+      &_m_BatteryUtils__getStructCoordinate, "getStructCoordinate", "()Lcom/example/batterylevel/BatteryUtils$Coordinate;");
+    if (_m_BatteryUtils__getStructCoordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    jobject _result = (*jniEnv)->CallObjectMethod(jniEnv, self_, _m_BatteryUtils__getStructCoordinate);
+    return to_global_ref_result(_result);
+}
+
 jmethodID _m_BatteryUtils__getInteger = NULL;
 FFI_PLUGIN_EXPORT
 JniResult BatteryUtils__getInteger(jobject self_) {
@@ -95,5 +134,90 @@ JniResult BatteryUtils__getIntegerStatic() {
     if (_m_BatteryUtils__getIntegerStatic == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
     int32_t _result = (*jniEnv)->CallStaticIntMethod(jniEnv, _c_BatteryUtils, _m_BatteryUtils__getIntegerStatic);
     return (JniResult){.value = {.i = _result}, .exception = check_exception()};
+}
+
+// com.example.batterylevel.BatteryUtils$Coordinate
+jclass _c_BatteryUtils_Coordinate = NULL;
+
+jmethodID _m_BatteryUtils_Coordinate__ctor = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils_Coordinate__ctor(int32_t x,int32_t y,int32_t z) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils_Coordinate,
+      &_m_BatteryUtils_Coordinate__ctor, "<init>", "(III)V");
+    if (_m_BatteryUtils_Coordinate__ctor == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    jobject _result = (*jniEnv)->NewObject(jniEnv, _c_BatteryUtils_Coordinate, _m_BatteryUtils_Coordinate__ctor, x, y, z);
+    return to_global_ref_result(_result);
+}
+
+jfieldID _f_BatteryUtils_Coordinate__x = NULL;
+FFI_PLUGIN_EXPORT
+JniResult get_BatteryUtils_Coordinate__x(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_field(_c_BatteryUtils_Coordinate, &_f_BatteryUtils_Coordinate__x, "x",
+      "I");
+    int32_t _result = (*jniEnv)->GetIntField(jniEnv, self_, _f_BatteryUtils_Coordinate__x);
+    return (JniResult){.value = {.i = _result}, .exception = check_exception()};
+}
+
+FFI_PLUGIN_EXPORT
+JniResult set_BatteryUtils_Coordinate__x(jobject self_, int32_t value) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_field(_c_BatteryUtils_Coordinate, &_f_BatteryUtils_Coordinate__x, "x",
+      "I");
+    (*jniEnv)->SetIntField(jniEnv, self_, _f_BatteryUtils_Coordinate__x, value);
+    return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+}
+
+jfieldID _f_BatteryUtils_Coordinate__y = NULL;
+FFI_PLUGIN_EXPORT
+JniResult get_BatteryUtils_Coordinate__y(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_field(_c_BatteryUtils_Coordinate, &_f_BatteryUtils_Coordinate__y, "y",
+      "I");
+    int32_t _result = (*jniEnv)->GetIntField(jniEnv, self_, _f_BatteryUtils_Coordinate__y);
+    return (JniResult){.value = {.i = _result}, .exception = check_exception()};
+}
+
+FFI_PLUGIN_EXPORT
+JniResult set_BatteryUtils_Coordinate__y(jobject self_, int32_t value) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_field(_c_BatteryUtils_Coordinate, &_f_BatteryUtils_Coordinate__y, "y",
+      "I");
+    (*jniEnv)->SetIntField(jniEnv, self_, _f_BatteryUtils_Coordinate__y, value);
+    return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+}
+
+jfieldID _f_BatteryUtils_Coordinate__z = NULL;
+FFI_PLUGIN_EXPORT
+JniResult get_BatteryUtils_Coordinate__z(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_field(_c_BatteryUtils_Coordinate, &_f_BatteryUtils_Coordinate__z, "z",
+      "I");
+    int32_t _result = (*jniEnv)->GetIntField(jniEnv, self_, _f_BatteryUtils_Coordinate__z);
+    return (JniResult){.value = {.i = _result}, .exception = check_exception()};
+}
+
+FFI_PLUGIN_EXPORT
+JniResult set_BatteryUtils_Coordinate__z(jobject self_, int32_t value) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils_Coordinate, "com/example/batterylevel/BatteryUtils$Coordinate");
+    if (_c_BatteryUtils_Coordinate == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_field(_c_BatteryUtils_Coordinate, &_f_BatteryUtils_Coordinate__z, "z",
+      "I");
+    (*jniEnv)->SetIntField(jniEnv, self_, _f_BatteryUtils_Coordinate__z, value);
+    return (JniResult){.value = {.j = 0}, .exception = check_exception()};
 }
 

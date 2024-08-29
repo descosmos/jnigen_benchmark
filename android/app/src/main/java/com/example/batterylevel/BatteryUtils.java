@@ -8,9 +8,11 @@ import android.os.Build;
 import android.widget.Toast;
 import androidx.annotation.Keep;
 import java.util.Map;
+import java.util.List;
 import java.util.HashMap;
 import android.util.Log;
 import java.lang.String;
+
 
 import io.flutter.embedding.android.FlutterActivity;
 
@@ -65,6 +67,30 @@ public class BatteryUtils {
 
     public Map<String, String> getMapTemplateData() {
         return myMap;
+    }
+
+    public String geString50() {
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123";
+    }
+
+    public String getString100() {
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123" +
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123"; 
+    }
+
+    @Keep
+    public class Coordinate {
+      public int x, y, z;
+  
+      public Coordinate(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+      }
+    }
+
+    public Coordinate getStructCoordinate() {
+        return new Coordinate(0, 0, 0);
     }
 
     public int getInteger() {

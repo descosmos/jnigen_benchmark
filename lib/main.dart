@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getBatteryLevel
     {
+      debugPrint("===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getBatteryLevel", null);
@@ -65,13 +66,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // Dart_Interop
       {
-        double elapsed = await timeFunction((){batteryUtils?.getBatteryStatus();});
+        double elapsed = await timeFunction(() {
+          batteryUtils?.getBatteryStatus();
+        });
         debugPrint("getBatteryLevel Dart_Interop elapsed: ${elapsed} µs");
       }
     }
 
     // getBatteryCharging
     {
+      debugPrint("===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getBatteryCharging", null);
@@ -80,9 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // Dart_Interop
       {
-        double elapsed = await timeFunction((){batteryUtils?.getBatteryCharging();});
-        debugPrint(
-            "getBatteryCharging Dart_Interop elapsed: ${elapsed} µs");
+        double elapsed = await timeFunction(() {
+          JString? res = batteryUtils?.getBatteryCharging();
+          res?.delete();
+        });
+        debugPrint("getBatteryCharging Dart_Interop elapsed: ${elapsed} µs");
       }
     }
 
@@ -101,8 +107,66 @@ class _MyHomePageState extends State<MyHomePage> {
     //   }
     // }
 
+    // geString50
+    {
+      debugPrint("===============================================================");
+      // MethodChannel
+      {
+        double elapsed = await timeChannelMethod("geString50", null);
+        debugPrint("geString50 MethodChannel elapsed: ${elapsed} µs");
+      }
+
+      // Dart_Interop
+      {
+        double elapsed = await timeFunction(() {
+          JString? res = batteryUtils?.geString50();
+          res?.delete();
+        });
+        debugPrint("geString50 Dart_Interop elapsed: ${elapsed} µs");
+      }
+    }
+
+    // getString100
+    {
+      debugPrint("===============================================================");
+      // MethodChannel
+      {
+        double elapsed = await timeChannelMethod("getString100", null);
+        debugPrint("getString100 MethodChannel elapsed: ${elapsed} µs");
+      }
+
+      // Dart_Interop
+      {
+        double elapsed = await timeFunction(() {
+          JString? res = batteryUtils?.getString100();
+          res?.delete();
+        });
+        debugPrint("getString100 Dart_Interop elapsed: ${elapsed} µs");
+      }
+    }
+
+    // getStructCoordinate
+    {
+      debugPrint("===============================================================");
+      // MethodChannel
+      {
+        // double elapsed = await timeChannelMethod("getStructCoordinate", null);
+        // debugPrint("getStructCoordinate MethodChannel elapsed: ${elapsed} µs");
+      }
+
+      // Dart_Interop
+      {
+        double elapsed = await timeFunction(() {
+          BatteryUtils_Coordinate? origin = batteryUtils?.getStructCoordinate();
+          origin?.delete();
+        });
+        debugPrint("getStructCoordinate Dart_Interop elapsed: ${elapsed} µs");
+      }
+    }
+
     // getInteger
     {
+      debugPrint("===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getInteger", null);
@@ -111,13 +175,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // Dart_Interop
       {
-        double elapsed = await timeFunction((){batteryUtils?.getInteger();});
+        double elapsed = await timeFunction(() {
+          batteryUtils?.getInteger();
+        });
         debugPrint("getInteger Dart_Interop elapsed: ${elapsed} µs");
       }
     }
 
     // getIntegerStatic
     {
+      debugPrint("===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getIntegerStatic", null);
@@ -126,7 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // Dart_Interop
       {
-        double elapsed = await timeFunction((){BatteryUtils.getIntegerStatic();});
+        double elapsed = await timeFunction(() {
+          BatteryUtils.getIntegerStatic();
+        });
         debugPrint("getIntegerStatic Dart_Interop elapsed: ${elapsed} µs");
       }
     }
@@ -139,7 +208,8 @@ class _MyHomePageState extends State<MyHomePage> {
       try {
         stopwatch.reset();
         stopwatch.start();
-        final result = await platform.invokeMethod<Object>(methodName, arguments);
+        final result =
+            await platform.invokeMethod<Object>(methodName, arguments);
         stopwatch.stop();
         sumDurationsInMilliseconds += stopwatch.elapsedMicroseconds;
         // debugPrint("Battery level at $result % .");
@@ -159,10 +229,9 @@ class _MyHomePageState extends State<MyHomePage> {
       try {
         stopwatch.reset();
         stopwatch.start();
-        final result = function();
+        function();
         stopwatch.stop();
         sumDurationsInMilliseconds += stopwatch.elapsedMicroseconds;
-        // debugPrint("Battery level at $result % .");
       } on PlatformException catch (e) {
         debugPrint("Error _getBatteryLevelNative ${e}");
       }

@@ -41,6 +41,12 @@ public class MainActivity extends FlutterActivity {
                                 result.success(batteryUtils.getInteger());
                             } else if (call.method.equals("getIntegerStatic")) {
                                 result.success(BatteryUtils.getIntegerStatic());
+                            } else if (call.method.equals("geString50")) {
+                                result.success(batteryUtils.geString50());
+                            } else if (call.method.equals("getString100")) {
+                                result.success(batteryUtils.getString100());
+                            } else if (call.method.equals("getStructCoordinate")) {
+                                result.success(batteryUtils.getStructCoordinate());
                             } else {
                                 result.notImplemented();
                             }

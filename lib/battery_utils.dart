@@ -86,6 +86,43 @@ class BatteryUtils extends jni.JObject {
         .fromRef(_getMapTemplateData(reference).object);
   }
 
+  static final _geString50 = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__geString50")
+      .asFunction<jni.JniResult Function(ffi.Pointer<ffi.Void>)>();
+
+  /// from: public java.lang.String geString50()
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  jni.JString geString50() {
+    return const jni.JStringType().fromRef(_geString50(reference).object);
+  }
+
+  static final _getString100 = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__getString100")
+      .asFunction<jni.JniResult Function(ffi.Pointer<ffi.Void>)>();
+
+  /// from: public java.lang.String getString100()
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  jni.JString getString100() {
+    return const jni.JStringType().fromRef(_getString100(reference).object);
+  }
+
+  static final _getStructCoordinate = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__getStructCoordinate")
+      .asFunction<jni.JniResult Function(ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.example.batterylevel.BatteryUtils.Coordinate getStructCoordinate()
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  BatteryUtils_Coordinate getStructCoordinate() {
+    return const $BatteryUtils_CoordinateType()
+        .fromRef(_getStructCoordinate(reference).object);
+  }
+
   static final _getInteger = jniLookup<
           ffi.NativeFunction<
               jni.JniResult Function(
@@ -130,5 +167,126 @@ class $BatteryUtilsType extends jni.JObjType<BatteryUtils> {
   bool operator ==(Object other) {
     return other.runtimeType == ($BatteryUtilsType) &&
         other is $BatteryUtilsType;
+  }
+}
+
+/// from: com.example.batterylevel.BatteryUtils$Coordinate
+class BatteryUtils_Coordinate extends jni.JObject {
+  @override
+  late final jni.JObjType<BatteryUtils_Coordinate> $type = type;
+
+  BatteryUtils_Coordinate.fromRef(
+    jni.JObjectPtr ref,
+  ) : super.fromRef(ref);
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $BatteryUtils_CoordinateType();
+  static final _get_x = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+    jni.JObjectPtr,
+  )>>("get_BatteryUtils_Coordinate__x")
+      .asFunction<
+          jni.JniResult Function(
+    jni.JObjectPtr,
+  )>();
+
+  static final _set_x = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  jni.JObjectPtr, ffi.Int32)>>("set_BatteryUtils_Coordinate__x")
+      .asFunction<jni.JniResult Function(jni.JObjectPtr, int)>();
+
+  /// from: public int x
+  int get x => _get_x(reference).integer;
+
+  /// from: public int x
+  set x(int value) => _set_x(reference, value).check();
+
+  static final _get_y = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+    jni.JObjectPtr,
+  )>>("get_BatteryUtils_Coordinate__y")
+      .asFunction<
+          jni.JniResult Function(
+    jni.JObjectPtr,
+  )>();
+
+  static final _set_y = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  jni.JObjectPtr, ffi.Int32)>>("set_BatteryUtils_Coordinate__y")
+      .asFunction<jni.JniResult Function(jni.JObjectPtr, int)>();
+
+  /// from: public int y
+  int get y => _get_y(reference).integer;
+
+  /// from: public int y
+  set y(int value) => _set_y(reference, value).check();
+
+  static final _get_z = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+    jni.JObjectPtr,
+  )>>("get_BatteryUtils_Coordinate__z")
+      .asFunction<
+          jni.JniResult Function(
+    jni.JObjectPtr,
+  )>();
+
+  static final _set_z = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  jni.JObjectPtr, ffi.Int32)>>("set_BatteryUtils_Coordinate__z")
+      .asFunction<jni.JniResult Function(jni.JObjectPtr, int)>();
+
+  /// from: public int z
+  int get z => _get_z(reference).integer;
+
+  /// from: public int z
+  set z(int value) => _set_z(reference, value).check();
+
+  static final _ctor = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Int32, ffi.Int32,
+                  ffi.Int32)>>("BatteryUtils_Coordinate__ctor")
+      .asFunction<jni.JniResult Function(int, int, int)>();
+
+  /// from: public void <init>(int x, int y, int z)
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  factory BatteryUtils_Coordinate(
+    int x,
+    int y,
+    int z,
+  ) {
+    return BatteryUtils_Coordinate.fromRef(_ctor(x, y, z).object);
+  }
+}
+
+class $BatteryUtils_CoordinateType
+    extends jni.JObjType<BatteryUtils_Coordinate> {
+  const $BatteryUtils_CoordinateType();
+
+  @override
+  String get signature => r"Lcom/example/batterylevel/BatteryUtils$Coordinate;";
+
+  @override
+  BatteryUtils_Coordinate fromRef(jni.JObjectPtr ref) =>
+      BatteryUtils_Coordinate.fromRef(ref);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($BatteryUtils_CoordinateType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BatteryUtils_CoordinateType) &&
+        other is $BatteryUtils_CoordinateType;
   }
 }
