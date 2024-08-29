@@ -13,6 +13,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import android.util.Log;
 import java.lang.String;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "samples.flutter.dev/battery";
@@ -46,7 +49,20 @@ public class MainActivity extends FlutterActivity {
                             } else if (call.method.equals("getString100")) {
                                 result.success(batteryUtils.getString100());
                             } else if (call.method.equals("getStructCoordinate")) {
-                                result.success(batteryUtils.getStructCoordinate());
+                                BatteryUtils.Coordinate coordinate = batteryUtils.getStructCoordinate();
+                                JSONObject jsonObject = new JSONObject();
+                                try {
+                                    jsonObject.put("x", coordinate.x);
+                                    jsonObject.put("y", coordinate.y);
+                                    jsonObject.put("z", coordinate.z);
+                                    jsonObject.put("descriptor", coordinate.descriptor);
+                                    jsonObject.put("w", coordinate.w);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                result.success(jsonObject.toString());
+                            } else if (call.method.equals("StringCatParameter")) {
+                                result.success(batteryUtils.StringCatParameter(call.argument("str")) );
                             } else {
                                 result.notImplemented();
                             }

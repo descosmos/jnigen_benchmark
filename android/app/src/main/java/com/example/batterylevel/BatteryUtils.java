@@ -80,17 +80,23 @@ public class BatteryUtils {
 
     @Keep
     public class Coordinate {
-      public int x, y, z;
+      public int x;
+      public int y;
+      public long z;
+      public String descriptor;
+      public double w;
   
-      public Coordinate(int x, int y, int z) {
+      public Coordinate(int x, int y, int z, String descriptor, double w) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.descriptor = descriptor;
+        this.w = w;
       }
     }
 
     public Coordinate getStructCoordinate() {
-        return new Coordinate(0, 0, 0);
+        return new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23);
     }
 
     public int getInteger() {
@@ -99,5 +105,9 @@ public class BatteryUtils {
 
     public static int getIntegerStatic() {
         return 72;
+    }
+
+    public String StringCatParameter(String str) {
+        return "java12345678901234567890" + str;
     }
 }

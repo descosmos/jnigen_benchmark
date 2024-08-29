@@ -143,6 +143,23 @@ class BatteryUtils extends jni.JObject {
   static int getIntegerStatic() {
     return _getIntegerStatic().integer;
   }
+
+  static final _StringCatParameter = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__StringCatParameter")
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public java.lang.String StringCatParameter(java.lang.String str)
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  jni.JString StringCatParameter(
+    jni.JString str,
+  ) {
+    return const jni.JStringType()
+        .fromRef(_StringCatParameter(reference, str.reference).object);
+  }
 }
 
 class $BatteryUtilsType extends jni.JObjType<BatteryUtils> {
@@ -238,29 +255,88 @@ class BatteryUtils_Coordinate extends jni.JObject {
   static final _set_z = jniLookup<
           ffi.NativeFunction<
               jni.JniResult Function(
-                  jni.JObjectPtr, ffi.Int32)>>("set_BatteryUtils_Coordinate__z")
+                  jni.JObjectPtr, ffi.Int64)>>("set_BatteryUtils_Coordinate__z")
       .asFunction<jni.JniResult Function(jni.JObjectPtr, int)>();
 
-  /// from: public int z
-  int get z => _get_z(reference).integer;
+  /// from: public long z
+  int get z => _get_z(reference).long;
 
-  /// from: public int z
+  /// from: public long z
   set z(int value) => _set_z(reference, value).check();
+
+  static final _get_descriptor = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+    jni.JObjectPtr,
+  )>>("get_BatteryUtils_Coordinate__descriptor")
+      .asFunction<
+          jni.JniResult Function(
+    jni.JObjectPtr,
+  )>();
+
+  static final _set_descriptor = jniLookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      jni.JObjectPtr, ffi.Pointer<ffi.Void>)>>(
+          "set_BatteryUtils_Coordinate__descriptor")
+      .asFunction<
+          jni.JniResult Function(jni.JObjectPtr, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public java.lang.String descriptor
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  jni.JString get descriptor =>
+      const jni.JStringType().fromRef(_get_descriptor(reference).object);
+
+  /// from: public java.lang.String descriptor
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  set descriptor(jni.JString value) =>
+      _set_descriptor(reference, value.reference).check();
+
+  static final _get_w = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+    jni.JObjectPtr,
+  )>>("get_BatteryUtils_Coordinate__w")
+      .asFunction<
+          jni.JniResult Function(
+    jni.JObjectPtr,
+  )>();
+
+  static final _set_w = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(jni.JObjectPtr,
+                  ffi.Double)>>("set_BatteryUtils_Coordinate__w")
+      .asFunction<jni.JniResult Function(jni.JObjectPtr, double)>();
+
+  /// from: public double w
+  double get w => _get_w(reference).doubleFloat;
+
+  /// from: public double w
+  set w(double value) => _set_w(reference, value).check();
 
   static final _ctor = jniLookup<
           ffi.NativeFunction<
-              jni.JniResult Function(ffi.Int32, ffi.Int32,
-                  ffi.Int32)>>("BatteryUtils_Coordinate__ctor")
-      .asFunction<jni.JniResult Function(int, int, int)>();
+              jni.JniResult Function(
+                  ffi.Int32,
+                  ffi.Int32,
+                  ffi.Int32,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Double)>>("BatteryUtils_Coordinate__ctor")
+      .asFunction<
+          jni.JniResult Function(
+              int, int, int, ffi.Pointer<ffi.Void>, double)>();
 
-  /// from: public void <init>(int x, int y, int z)
+  /// from: public void <init>(int x, int y, int z, java.lang.String descriptor, double w)
   /// The returned object must be deleted after use, by calling the `delete` method.
   factory BatteryUtils_Coordinate(
     int x,
     int y,
     int z,
+    jni.JString descriptor,
+    double w,
   ) {
-    return BatteryUtils_Coordinate.fromRef(_ctor(x, y, z).object);
+    return BatteryUtils_Coordinate.fromRef(
+        _ctor(x, y, z, descriptor.reference, w).object);
   }
 }
 

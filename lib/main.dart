@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,32 @@ import 'package:jni/jni.dart';
 import 'dart:developer';
 
 import 'battery_utils.dart';
+
+class Coordinate {
+  int x;
+  int y;
+  int z;
+  String descriptor;
+  double w;
+
+  Coordinate({
+    required this.x,
+    required this.y,
+    required this.z,
+    required this.descriptor,
+    required this.w,
+  });
+
+  factory Coordinate.fromJson(Map<String, dynamic> json) {
+    return Coordinate(
+      x: json['x'],
+      y: json['y'],
+      z: json['z'],
+      descriptor: json['descriptor'],
+      w: json['w'],
+    );
+  }
+}
 
 void main() {
   runApp(const MyApp());
@@ -41,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static const platform = MethodChannel('samples.flutter.dev/battery');
   static const int NUM = 1000;
   static const double NUM_DOUBLE = 1000.0;
+  int sum = 0;
   JObject? activity;
   BatteryUtils? batteryUtils;
   // Get battery level.
@@ -57,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getBatteryLevel
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getBatteryLevel", null);
@@ -75,7 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getBatteryCharging
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getBatteryCharging", null);
@@ -109,7 +139,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // geString50
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("geString50", null);
@@ -128,7 +159,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getString100
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getString100", null);
@@ -147,17 +179,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getStructCoordinate
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
-        // double elapsed = await timeChannelMethod("getStructCoordinate", null);
-        // debugPrint("getStructCoordinate MethodChannel elapsed: ${elapsed} µs");
+        double elapsed = await timeChannelMethod("getStructCoordinate", null);
+        debugPrint("getStructCoordinate MethodChannel elapsed: ${elapsed} µs");
       }
 
       // Dart_Interop
       {
         double elapsed = await timeFunction(() {
           BatteryUtils_Coordinate? origin = batteryUtils?.getStructCoordinate();
+          sum += origin!.x;
           origin?.delete();
         });
         debugPrint("getStructCoordinate Dart_Interop elapsed: ${elapsed} µs");
@@ -166,7 +200,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getInteger
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getInteger", null);
@@ -184,7 +219,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // getIntegerStatic
     {
-      debugPrint("===============================================================");
+      debugPrint(
+          "===============================================================");
       // MethodChannel
       {
         double elapsed = await timeChannelMethod("getIntegerStatic", null);
@@ -199,6 +235,28 @@ class _MyHomePageState extends State<MyHomePage> {
         debugPrint("getIntegerStatic Dart_Interop elapsed: ${elapsed} µs");
       }
     }
+
+    // StringCatParameter
+    {
+      debugPrint(
+          "===============================================================");
+      // MethodChannel
+      {
+        double elapsed = await timeChannelMethod("StringCatParameter", null);
+        debugPrint("StringCatParameter MethodChannel elapsed: ${elapsed} µs");
+      }
+
+      // Dart_Interop
+      {
+        double elapsed = await timeFunction(() {
+          JString? res = batteryUtils?.StringCatParameter(
+              JString.fromString("dart12234548871627467812674612864812"));
+        });
+        debugPrint("StringCatParameter Dart_Interop elapsed: ${elapsed} µs");
+      }
+    }
+
+    debugPrint("${sum}");
   }
 
   Future<double> timeChannelMethod(String methodName, dynamic arguments) async {
@@ -210,6 +268,12 @@ class _MyHomePageState extends State<MyHomePage> {
         stopwatch.start();
         final result =
             await platform.invokeMethod<Object>(methodName, arguments);
+        if (methodName == "getStructCoordinate") {
+          String? jsonStr = result as String?;
+          final jsonMap = jsonDecode(jsonStr!);
+          final myObject = Coordinate.fromJson(jsonMap);
+          sum += myObject.x;
+        }
         stopwatch.stop();
         sumDurationsInMilliseconds += stopwatch.elapsedMicroseconds;
         // debugPrint("Battery level at $result % .");
