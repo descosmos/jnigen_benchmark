@@ -9,10 +9,10 @@ import android.widget.Toast;
 import androidx.annotation.Keep;
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import android.util.Log;
 import java.lang.String;
-
 
 import io.flutter.embedding.android.FlutterActivity;
 
@@ -75,24 +75,24 @@ public class BatteryUtils {
 
     public String getString100() {
         return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123" +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123"; 
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123";
     }
 
     @Keep
     public class Coordinate {
-      public int x;
-      public int y;
-      public long z;
-      public String descriptor;
-      public double w;
-  
-      public Coordinate(int x, int y, int z, String descriptor, double w) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.descriptor = descriptor;
-        this.w = w;
-      }
+        public int x;
+        public int y;
+        public long z;
+        public String descriptor;
+        public double w;
+
+        public Coordinate(int x, int y, int z, String descriptor, double w) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.descriptor = descriptor;
+            this.w = w;
+        }
     }
 
     public Coordinate getStructCoordinate() {
@@ -109,5 +109,14 @@ public class BatteryUtils {
 
     public String StringCatParameter(String str) {
         return "java12345678901234567890" + str;
+    }
+
+    public List<Coordinate> getCoordinateList() {
+        return new ArrayList<Coordinate>(
+                List.of(new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
+                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
+                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
+                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
+                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23)));
     }
 }

@@ -160,6 +160,19 @@ class BatteryUtils extends jni.JObject {
     return const jni.JStringType()
         .fromRef(_StringCatParameter(reference, str.reference).object);
   }
+
+  static final _getCoordinateList = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__getCoordinateList")
+      .asFunction<jni.JniResult Function(ffi.Pointer<ffi.Void>)>();
+
+  /// from: public java.util.List<com.example.batterylevel.BatteryUtils.Coordinate> getCoordinateList()
+  /// The returned object must be deleted after use, by calling the `delete` method.
+  jni.JList<BatteryUtils_Coordinate> getCoordinateList() {
+    return const jni.JListType($BatteryUtils_CoordinateType())
+        .fromRef(_getCoordinateList(reference).object);
+  }
 }
 
 class $BatteryUtilsType extends jni.JObjType<BatteryUtils> {

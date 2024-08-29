@@ -256,6 +256,31 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
+    // getCoordinateList
+    {
+      debugPrint(
+          "===============================================================");
+      // MethodChannel
+      {
+        double elapsed = await timeChannelMethod("getCoordinateList", null);
+        debugPrint("getCoordinateList MethodChannel elapsed: ${elapsed} µs");
+      }
+
+      // Dart_Interop
+      {
+        double elapsed = await timeFunction(() {
+          JList<BatteryUtils_Coordinate> coordinates =
+              batteryUtils!.getCoordinateList();
+          for (final coordinate in coordinates) {
+            sum += coordinate.x;
+            coordinate.delete();
+          }
+          coordinates.delete();
+        });
+        debugPrint("getCoordinateList Dart_Interop elapsed: ${elapsed} µs");
+      }
+    }
+
     debugPrint("${sum}");
   }
 
@@ -273,6 +298,13 @@ class _MyHomePageState extends State<MyHomePage> {
           final jsonMap = jsonDecode(jsonStr!);
           final myObject = Coordinate.fromJson(jsonMap);
           sum += myObject.x;
+        } else if (methodName == "getCoordinateList") {
+          String? jsonStr = result as String?;
+          final List<dynamic> jsonList = jsonDecode(jsonStr!);
+          for (var item in jsonList) {
+            final myObject = Coordinate.fromJson(item);
+            sum += myObject.x; 
+          }
         }
         stopwatch.stop();
         sumDurationsInMilliseconds += stopwatch.elapsedMicroseconds;

@@ -16,6 +16,8 @@ import java.lang.String;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "samples.flutter.dev/battery";
@@ -23,8 +25,8 @@ public class MainActivity extends FlutterActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); 
-        batteryUtils = new BatteryUtils(this); 
+        super.onCreate(savedInstanceState);
+        batteryUtils = new BatteryUtils(this);
     }
 
     @Override
@@ -62,7 +64,24 @@ public class MainActivity extends FlutterActivity {
                                 }
                                 result.success(jsonObject.toString());
                             } else if (call.method.equals("StringCatParameter")) {
-                                result.success(batteryUtils.StringCatParameter(call.argument("str")) );
+                                result.success(batteryUtils.StringCatParameter(call.argument("str")));
+                            } else if (call.method.equals("getCoordinateList")) {
+                                List<BatteryUtils.Coordinate> coordinates = batteryUtils.getCoordinateList();
+                                JSONArray jsonArray = new JSONArray();
+                                for (BatteryUtils.Coordinate coordinate : coordinates) {
+                                    JSONObject jsonObject = new JSONObject();
+                                    try {
+                                        jsonObject.put("x", coordinate.x);
+                                        jsonObject.put("y", coordinate.y);
+                                        jsonObject.put("z", coordinate.z);
+                                        jsonObject.put("descriptor", coordinate.descriptor);
+                                        jsonObject.put("w", coordinate.w);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    jsonArray.put(jsonObject);
+                                }
+                                result.success(jsonArray.toString());
                             } else {
                                 result.notImplemented();
                             }

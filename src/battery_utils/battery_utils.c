@@ -149,6 +149,19 @@ JniResult BatteryUtils__StringCatParameter(jobject self_,jobject str) {
     return to_global_ref_result(_result);
 }
 
+jmethodID _m_BatteryUtils__getCoordinateList = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__getCoordinateList(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils,
+      &_m_BatteryUtils__getCoordinateList, "getCoordinateList", "()Ljava/util/List;");
+    if (_m_BatteryUtils__getCoordinateList == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    jobject _result = (*jniEnv)->CallObjectMethod(jniEnv, self_, _m_BatteryUtils__getCoordinateList);
+    return to_global_ref_result(_result);
+}
+
 // com.example.batterylevel.BatteryUtils$Coordinate
 jclass _c_BatteryUtils_Coordinate = NULL;
 
