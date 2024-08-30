@@ -35,6 +35,17 @@ class BatteryUtils extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $BatteryUtilsType();
+  static final _init = jniLookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>)>>("BatteryUtils__init")
+      .asFunction<jni.JniResult Function(ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void init()
+  void init() {
+    return _init(reference).check();
+  }
+
   static final _ctor = jniLookup<
           ffi.NativeFunction<
               jni.JniResult Function(

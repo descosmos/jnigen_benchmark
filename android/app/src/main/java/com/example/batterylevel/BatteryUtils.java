@@ -18,23 +18,32 @@ import io.flutter.embedding.android.FlutterActivity;
 
 @Keep
 public class BatteryUtils {
+    @Keep
+    public class Coordinate {
+        public int x;
+        public int y;
+        public long z;
+        public String descriptor;
+        public double w;
+
+        public Coordinate(int x, int y, int z, String descriptor, double w) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.descriptor = descriptor;
+            this.w = w;
+        }
+    }
+
     private static final Map<String, String> myMap = new HashMap<String, String>();
-    static {
-        myMap.put("aion1", "bdhkashkdhjkash1");
-        myMap.put("aion2", "bdhkashkdhjkash2");
-        myMap.put("aion3", "bdhkashkdhjkash3");
-        myMap.put("aion4", "bdhkashkdhjkash4");
-        myMap.put("aion5", "bdhkashkdhjkash5");
-        myMap.put("aion6", "bdhkashkdhjkash6");
-        myMap.put("aion7", "bdhkashkdhjkash7");
-        myMap.put("aion8", "bdhkashkdhjkash8");
-        myMap.put("aion9", "bdhkashkdhjkash9");
-        myMap.put("aion10", "bdhkashkdhjkash10");
-        myMap.put("aion11", "bdhkashkdhjkash11");
-        myMap.put("aion12", "bdhkashkdhjkash12");
-        myMap.put("aion13", "bdhkashkdhjkash13");
-        myMap.put("aion14", "bdhkashkdhjkash14");
-        myMap.put("aion15", "bdhkashkdhjkash15");
+    private static final List<Coordinate> coordinates = new ArrayList<Coordinate>();
+    private static final int TIMES = 5;
+
+    public void init() {
+        for (int i = 0; i < TIMES; i++) {
+            coordinates.add(new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23));
+            myMap.put("aion" + i, "bdhkashkdhjkash" + i);
+        }
     }
 
     BatteryManager batteryManager;
@@ -78,23 +87,6 @@ public class BatteryUtils {
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123";
     }
 
-    @Keep
-    public class Coordinate {
-        public int x;
-        public int y;
-        public long z;
-        public String descriptor;
-        public double w;
-
-        public Coordinate(int x, int y, int z, String descriptor, double w) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.descriptor = descriptor;
-            this.w = w;
-        }
-    }
-
     public Coordinate getStructCoordinate() {
         return new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23);
     }
@@ -112,11 +104,6 @@ public class BatteryUtils {
     }
 
     public List<Coordinate> getCoordinateList() {
-        return new ArrayList<Coordinate>(
-                List.of(new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
-                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
-                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
-                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23),
-                        new Coordinate(1, 2, 3, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu123", 1.23)));
+        return coordinates;
     }
 }

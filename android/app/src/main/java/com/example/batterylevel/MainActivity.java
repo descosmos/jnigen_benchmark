@@ -27,6 +27,7 @@ public class MainActivity extends FlutterActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         batteryUtils = new BatteryUtils(this);
+        batteryUtils.init();
     }
 
     @Override

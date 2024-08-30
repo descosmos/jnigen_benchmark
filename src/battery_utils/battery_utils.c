@@ -19,6 +19,19 @@ void setJniGetters(JniContext *(*cg)(void),
 // com.example.batterylevel.BatteryUtils
 jclass _c_BatteryUtils = NULL;
 
+jmethodID _m_BatteryUtils__init = NULL;
+FFI_PLUGIN_EXPORT
+JniResult BatteryUtils__init(jobject self_) {
+    load_env();
+        load_class_global_ref(&_c_BatteryUtils, "com/example/batterylevel/BatteryUtils");
+    if (_c_BatteryUtils == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    load_method(_c_BatteryUtils,
+      &_m_BatteryUtils__init, "init", "()V");
+    if (_m_BatteryUtils__init == NULL) return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+    (*jniEnv)->CallVoidMethod(jniEnv, self_, _m_BatteryUtils__init);
+    return (JniResult){.value = {.j = 0}, .exception = check_exception()};
+}
+
 jmethodID _m_BatteryUtils__ctor = NULL;
 FFI_PLUGIN_EXPORT
 JniResult BatteryUtils__ctor(jobject activity) {
